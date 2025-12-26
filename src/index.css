@@ -1,0 +1,19 @@
+/* global css */
+@import "tailwindcss";
+
+
+/* custom styles */
+@theme {
+ --color-primary: #6366F1;
+ --color-secondary: #10B981;
+ --color-background: #FAFAFA;
+ --color-text: #111827;   
+}
+
+
+@layer theme{
+    /* dark mode variants here for the theme */
+} 
+
+
+
