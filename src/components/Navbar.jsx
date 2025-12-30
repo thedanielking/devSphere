@@ -1,38 +1,22 @@
 import { useState } from "react"
-import { HiOutlineBars3, HiXMark } from "react-icons/hi2"
+// import { HiOutlineBars3, HiXMark } from "react-icons/hi2"
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
     const { user } =  useAuth(); 
-    // console.log(user);
-    const [openNav, setOpenNav] = useState(false);
-
-    const handleToggle = ()=>{
-        setOpenNav(!openNav)
-    }
 
     return (
-        <nav className="flex justify-between items-center p-4 relative">
-            <img src="../default-monochrome-black.svg" alt="DevSphere Logo" width={150} />
-            {user 
-            ? <p>{user?.email}</p> 
-            : (
-                <>
-                <HiOutlineBars3 onClick={handleToggle} className=" text-3xl cursor-pointer "/>
-                <div className={openNav ? `h-screen w-full right-0 top-0 z-1 bg-stone-900/50 absolute translate-x-2`: `hidden`}>
-                    <div className={`bg-stone-200 h-full w-3/4 absolute right-0 top-0 p-5 flex flex-col gap-5`}>
-                        <HiXMark className="self-end text-2xl cursor-pointer" onClick={handleToggle} />
-                        <ul className="flex flex-col gap-6 text-lg">
-                            <Link to="/" className="text-xl">Home</Link>
-                            <Link to="/login" className="text-xl">Login</Link>
-                            <Link to="/signUp" className="text-xl">Sign Up</Link>
-                        </ul>
-                    </div>
-                </div>
-                </>
-            )
-            }    
+        <nav className="flex justify-between items-center px-5 py-3 max-w-xl mx-auto sticky top-2 z-10 w-full backdrop-blur-lg bg-white/30 border-b border-white border-opacity-30 shadow-lg rounded-full mt-10">
+            <Link to="/">
+                <img src="../default-monochrome-black.svg" alt="DevSphere Logo" className="w-[120px] md:w-[150px]" />
+            </Link>
+            <div className="flex gap-4 items-center">
+                <Link to="/posts" className="font-medium text-lg lg:text-xl  hover:underline">Articles</Link>
+                <Link to="/login" className="bg-primary text-stone-100 px-5 py-2 rounded-full hover:opacity-90 transition ">
+                    Sign In
+                </Link>
+            </div>
         </nav>
     )
 }
