@@ -13,9 +13,13 @@ function Navbar() {
             </Link>
             <div className="flex gap-4 items-center">
                 <Link to="/posts" className="font-medium text-lg lg:text-xl  hover:underline">Articles</Link>
-                <Link to="/login" className="bg-primary text-stone-100 px-5 py-2 rounded-full hover:opacity-90 transition ">
+                {user 
+                ? <img src="../team3.jpg" alt="avatar" className="w-7 h-7 rounded-full" />
+                : <Link to="/login" className="bg-primary text-stone-100 px-5 py-2 rounded-full hover:opacity-90 transition ">
                     Sign In
                 </Link>
+                }
+                
             </div>
         </nav>
     )

@@ -18,9 +18,9 @@ function useLogin() {
         }
         catch (err){
             const message= err?.message;
-            setError(message);
-            toast.error(message);
-            onError?.(message);
+            setError(message && "No stable internet connection");
+            toast.error(message && "No stable internet connection");
+            onError?.(message && "No stable internet connection");
         }
         finally{
             setIsLoading(false); 

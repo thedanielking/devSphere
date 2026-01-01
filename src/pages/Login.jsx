@@ -8,11 +8,15 @@ import useLogin from "../features/authentication/useLogin";
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const {handleLogin, isLoading, error} = useLogin(); 
+    const [error, setError] = useState(null);
+    const {handleLogin, isLoading} = useLogin(); 
 
     const handleSubmit = (e)=> {
         e.preventDefault();
-        if(!email || !password) return;
+        if(!email || !password){
+            setError("Please fill all the fields");
+            return;
+        } 
         handleLogin({email, password});
     }
     
@@ -52,7 +56,7 @@ function Login() {
                         {isLoading ? "Logging in..." : "Log in"}
                     </Button>
                 </form>
-                {error && <p className="text-red-400">{error}</p>}            
+                {error && <p className="text-red-600">{error}</p>}            
             </main>    
             <p className="italic">
                 Don't have an account? 
