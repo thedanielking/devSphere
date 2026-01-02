@@ -5,6 +5,7 @@ import AppLayout from "./components/AppLayout"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import PostPage from "./pages/PostPage";
+import Posts from "./components/Posts";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signUp" element={<Signup />} />
+          <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:slug" element={<PostPage />} />
         </Route>
       </Routes>
