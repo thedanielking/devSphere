@@ -12,11 +12,10 @@ function Post({post}) {
    
     
     return (
-        <Link to={`/posts/${slug}`}>
         <div className="flex flex-col gap-4 bg-white overflow-hidden rounded-xl cursor-pointer shadow">
             <picture className=" w-full">
                 <source srcSet="../team3.jpg" type="image/jpg" />
-                <img src="../team3.jpg" alt="post image" className="w-full"/>
+                <img src="../team3.jpg" alt="post image" className="w-full transition duration-300 ease-in-out transform hover:scale-110"/>
             </picture>
             <div className=" space-y-3 p-5">
                 <h3 className="text-xl font-medium lg:text-2xl">
@@ -44,14 +43,15 @@ function Post({post}) {
                         <GoHeart className="text-xl text-red-600" />
                         <span>{likes_count} likes</span>
                     </div>
-                    <div className="flex items-center gap-1 px-5 py-2 rounded bg-primary">
-                        <TbArrowBadgeRightFilled className="text-2xl text-white" />
-                        <span className="text-white font-medium text-lg lg:text-xl">Read</span>
-                    </div>
+                    <Link to={`/posts/${slug}`}>
+                        <div className="flex items-center gap-1 px-5 py-2 rounded bg-primary">
+                            <TbArrowBadgeRightFilled className="text-2xl text-white" />
+                            <span className="text-white font-medium text-lg lg:text-xl">Read</span>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </div>
-        </Link>
     )
 }
 

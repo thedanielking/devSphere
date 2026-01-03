@@ -1,11 +1,13 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import Homepage from "./pages/Homepage"
 import AppLayout from "./components/AppLayout"
+
+
+import Homepage from "./pages/Homepage"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import PostPage from "./pages/PostPage";
-import Posts from "./components/Posts";
+import Posts from "./pages/Posts";
 
 function App() {
   return (

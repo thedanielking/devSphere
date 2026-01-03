@@ -1,9 +1,8 @@
-import Skeleton from "@mui/material/Skeleton";
+import usePosts from "../features/posts/usePosts";
 import Filter from "../components/Filter"
 import Header from "../components/Header"
 import Post from "../components/Post";
-import Posts from "../components/Posts"
-import usePosts from "../features/posts/usePosts";
+import SkeletonLoading from "../components/SkeletonLoading";
 
 function Homepage() {
     const {isLoading, posts, error} = usePosts();
@@ -25,17 +24,12 @@ function Homepage() {
                     <p className="text-md lg:text-lg text-stone-500 mt-1">Discover trending developer articles</p>
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 lg:gap-6">
                         {isLoading ? (
-                            Array.from({length: limit}).map((_, i) => (
-                                <div key={i} className="rounded-md p-4 bg-white">
-                                    <Skeleton variant="rectangular" height={200} />
-                                    <div className="mt-4">
-                                        <Skeleton width="60%" />
-                                        <Skeleton width="40%" />
-                                        <Skeleton />
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
+                            <SkeletonLoading skeletonCount={limit} />
+                        )
+                        : error ? (
+                            <p>Error loading posts</p>
+                        )
+                        : (
                             popularPosts.map((post)=>(
                                 <Post key={post.id} post={post} />
                             ))

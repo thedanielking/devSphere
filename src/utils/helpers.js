@@ -29,6 +29,20 @@ export const formatCurrency = (value) =>
     value
   );
 
+// Sort posts by latest (created_at)
+export const sortByLatest = (posts) => {
+  if (!Array.isArray(posts)) return []; //safety check if the posts is not an array
+  return [...posts].sort((a, b) => { //copy of the posts array and sort it.
+    const dateA = new Date(a.created_at);
+    const dateB = new Date(b.created_at);
+    return dateB - dateA; // newest first
+  });
+};
 
-
-  
+// Sort posts by popular (likes_count)
+export const sortByPopular = (posts) => {
+  if (!Array.isArray(posts)) return [];
+  return [...posts].sort((a, b) => {
+    return (b.likes_count || 0) - (a.likes_count || 0); // highest likes first
+  });
+};
