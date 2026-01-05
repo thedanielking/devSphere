@@ -46,3 +46,20 @@ export const sortByPopular = (posts) => {
     return (b.likes_count || 0) - (a.likes_count || 0); // highest likes first
   });
 };
+
+export const filterPosts = (posts, selectedTags) => {
+  if (!Array.isArray(posts)) return [];
+  if (!selectedTags || selectedTags.length === 0) return posts;
+
+  return posts.filter((post) => {
+    if (!post.tags) return false; // skips if there are no tags in that post
+    
+    // Handle if tags is a string (comma-separated) or array
+    const postTags = Array.isArray(post.tags) 
+      ? post.tags 
+      : String(post.tags).split(",").map(tag => tag.trim());
+       
+    // Check if any of the post's tags are in the selectedTags
+    return postTags.some((tag) => selectedTags.includes(tag));
+  });
+};

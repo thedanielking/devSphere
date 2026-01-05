@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import PostsHeader from "../components/PostsHeader";
 import PostsList from "../components/PostsList";
-import { sortByLatest, sortByPopular } from "../utils/helpers";
+import { filterPosts, sortByLatest, sortByPopular } from "../utils/helpers";
 import usePosts from "../features/posts/usePosts";
 import { useSearchParams } from "react-router-dom";
 
@@ -10,15 +10,20 @@ function Posts() {
     const [searchParams] = useSearchParams();
     const sortBy = searchParams.get("sortBy") || "latest";
 
-    const sortedPosts = useMemo(()=> {
+    const sortedFilteredPosts = useMemo(()=> {
         if(!posts || posts.length === 0) return [];
         
+        const tags = searchParams.get("tags")?.split(",") || [];
+        //filter by tags
+        const filtered = filterPosts(posts, tags);
+        
+        //then sort
         if(sortBy === "latest") {
-            return sortByLatest(posts); 
+            return sortByLatest(filtered); 
         } else if(sortBy === "popular") {
-            return sortByPopular(posts);
+            return sortByPopular(filtered);
         }
-    }, [posts, sortBy])
+    }, [posts, searchParams, sortBy])
     return (
         <div className="flex-1 p-10 space-y-6 lg:py-10 lg:px-30">
             <div>
@@ -26,7 +31,7 @@ function Posts() {
                 <p className="text-lg text-text lg:text-xl">Discover and share developers articles</p>
             </div>
             <PostsHeader />
-            <PostsList posts={sortedPosts} isLoading={isLoading} error={error} />
+            <PostsList posts={sortedFilteredPosts} isLoading={isLoading} error={error} />
         </div>
     )
 }
