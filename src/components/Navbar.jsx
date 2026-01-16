@@ -1,16 +1,18 @@
-import { useState } from "react"
-// import { HiOutlineBars3, HiXMark } from "react-icons/hi2"
+import { HiOutlineBars3, HiXMark } from "react-icons/hi2"
 import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext";
 
-function Navbar() {
+function Navbar({toggleSideNav}) {
     const { user } =  useAuth(); 
 
     return (
-        <nav className="flex justify-between items-center px-5 py-3 max-w-xl mx-auto sticky top-2 z-10 w-full backdrop-blur-lg bg-white/30 border-b border-white border-opacity-30 shadow-lg rounded-full mt-10">
-            <Link to="/">
-                <img src="../default-monochrome-black.svg" alt="DevSphere Logo" className="w-[120px] md:w-[150px]" />
-            </Link>
+        <nav className="flex justify-between items-center px-5 py-3 max-w-xl mx-auto sticky top-0 z-10 w-full backdrop-blur-lg bg-white/30 border-b border-white border-opacity-30 shadow-lg rounded-full mt-10">
+            <div className="flex items-center gap-4">
+                <HiOutlineBars3 className="text-xl cursor-pointer lg:hidden" onClick={toggleSideNav}  />
+                <Link to="/">
+                    <img src="../default-monochrome-black.svg" alt="DevSphere Logo" className="w-[120px] md:w-[150px]" />
+                </Link>
+            </div>
             <div className="flex gap-4 items-center">
                 <Link to="/posts" className="font-medium text-lg lg:text-xl  hover:underline">Articles</Link>
                 {user 

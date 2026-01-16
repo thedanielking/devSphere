@@ -11,7 +11,7 @@ function Homepage() {
         return post;
     })  
     return (
-        <div>
+        <div className="flex-6">
             <Header />
             <section className="space-y-3">
                 <div>
