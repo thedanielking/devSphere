@@ -1,14 +1,21 @@
 import { GoHome, GoPerson, GoBookmark } from "react-icons/go";
 import { CiSettings, CiLogout } from "react-icons/ci";
 import { Link } from "react-router-dom";
+import useLogout from "../features/authentication/useLogout";
 
 function SideNavBar({display}) {
+    const logout = useLogout();
+    
+    function handleLogout(){
+        logout();
+    }
+
     return (
         <ul className={`px-4 py-6 space-y-12 text-xl backdrop-blur-lg shadow-md
-    fixed left-0 h-screen w-64 z-50
-    transform transition-transform duration-300 ease-in-out
-    ${display ? 'translate-x-0' : '-translate-x-full'}
-    lg:static lg:translate-x-0 lg:z-auto lg:block lg:w-64 lg:transition-none
+        fixed left-0 h-screen w-64 z-50
+        transform transition-transform duration-300 ease-in-out
+        ${display ? 'translate-x-0' : '-translate-x-full'}
+        lg:static lg:translate-x-0 lg:z-auto lg:block lg:w-64 lg:transition-none
   `}>
             
             <Link to="/" className="px-3 py-4 flex items-center gap-2 hover:bg-white/30 cursor-pointer rounded">
@@ -31,10 +38,10 @@ function SideNavBar({display}) {
                 <span>Settings</span>
             </Link>
 
-            <Link className="px-3 py-4 flex items-center gap-2 hover:bg-white/30 cursor-pointer rounded">
+            <li className="px-3 py-4 flex items-center gap-2 hover:bg-white/30 cursor-pointer rounded" onClick={()=>handleLogout()}>
                 <CiLogout className="text-primary" />
                 <span>Logout</span>
-            </Link>
+            </li>
         </ul>
     )
 }
