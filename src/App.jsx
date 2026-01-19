@@ -2,12 +2,15 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./components/AppLayout"
 
-
 import Homepage from "./pages/Homepage"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import PostPage from "./pages/PostPage";
 import Posts from "./pages/Posts";
+
+import ProtectedRoute from "./components/ProtectedRoute";
+import WritePost from "./components/WritePost";
+
 
 function App() {
   return (
@@ -21,6 +24,12 @@ function App() {
           <Route path="/signUp" element={<Signup />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:slug" element={<PostPage />} />
+          <Route path="/library/write" element={
+            <ProtectedRoute>
+              <WritePost />
+            </ProtectedRoute >
+          }/> 
+          
         </Route>
       </Routes>
     </BrowserRouter>
