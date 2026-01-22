@@ -7,9 +7,9 @@ import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import PostPage from "./pages/PostPage";
 import Posts from "./pages/Posts";
+import WritePost from "./pages/WritePost";
 
 import ProtectedRoute from "./components/ProtectedRoute";
-import WritePost from "./components/WritePost";
 
 
 function App() {
