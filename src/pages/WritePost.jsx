@@ -24,10 +24,17 @@ function WritePost(){
 
     const handleSubmit = (published = false) => {
         if(!form.title || !form.summary || !form.content) return;
+
+        const normalizedTagsText = form.tags
+            .split(',')
+            .map(t => t.trim())
+            .filter(Boolean)
+            .join(',');
+
         writePost({
             ...form,
             coverImageUrl: "", //coverImage,
-            tags: form.tags.split(',').map(tag => tag.trim()),
+            tags: normalizedTagsText,
             published,
         });
     }

@@ -6,9 +6,13 @@ import Tags from "./Tags"
 function Post({post}) {
     const {title, tags, slug, summary, read_time, likes_count } = post;
 
-    const tagList = Array.isArray(tags) ? tags 
+    const tagList = Array.isArray(tags) 
+    ? tags 
     : (typeof tags === "string" 
-        ? tags.split(",").map(tag => tag.trim()).filter(Boolean) : []); 
+        ? tags
+        .replace(/[\[\]\"]/g, "") //handles old json
+        .split(",")
+        .map(tag => tag.trim()).filter(Boolean) : []); 
    
     
     return (
