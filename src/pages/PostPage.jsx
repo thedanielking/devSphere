@@ -6,6 +6,7 @@ import usePosts from "../features/posts/usePosts";
 import Spinner from "../components/Spinner";
 import useProfile from "../features/profiles/useProfile";
 import { formatDateFns} from "../utils/helpers";
+import NetworkError from "../components/NetworkError"
 
 function PostPage() {
     const {postId} = useParams();
@@ -28,7 +29,9 @@ function PostPage() {
             fetchProfile(post?.author_id)
     }, [post?.author_id]);  
 
-    if(postError || profileError) return <p>{postError?.message || profileError?.message}</p>;
+    if(postError || profileError) return (
+        <NetworkError />
+    );
     if(postLoading || profileLoading || !post) return (
         <div className="flex-6">
             <Spinner />
@@ -40,11 +43,7 @@ function PostPage() {
 
     
     return (
-        <div className="px-3 py-12 lg:px-50 flex flex-col gap-5">
-            {/* <div className="flex items-center gap-1 cursor-pointer" onClick={goBack}>
-                <IoArrowBackCircleOutline className="text-xl text-stone-600" />
-                <span className="text-sm text-stone-600">Back</span>
-            </div> */}
+        <div className="px-3 py-12 lg:px-50 flex flex-col gap-5">           
             <div className="text-center flex flex-col justify-center items-center gap-2">
                 <h1 className="text-2xl lg:text-4xl font-bold mb-4">{title} </h1>
                 <PostDetails profile={profile} readTime={read_time} dateTime={dateTime} postId={postId} title={title} />

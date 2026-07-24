@@ -3,6 +3,7 @@ import Filter from "../components/Filter"
 import Header from "../components/Header"
 import Post from "../components/Post";
 import SkeletonLoading from "../components/SkeletonLoading";
+import PostsList from "../components/PostsList";
 
 function Homepage() {
     const {isLoading, posts, error} = usePosts();
@@ -22,19 +23,7 @@ function Homepage() {
                 <div className="py-12 px-2 lg:py-20 lg:px-10">
                     <h2 className="text-xl lg:text-2xl font-medium">Popular Articles</h2>
                     <p className="text-sm lg:text-base text-stone-500 mt-1">Discover trending developer articles</p>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5 lg:gap-6">
-                        {isLoading ? (
-                            <SkeletonLoading skeletonCount={limit} />
-                        )
-                        : error ? (
-                            <p>Error loading posts</p>
-                        )
-                        : (
-                            popularPosts.map((post)=>(
-                                <Post key={post.id} post={post} />
-                            ))
-                        )}
-                    </div>
+                    <PostsList posts={popularPosts} isLoading={isLoading} error={error} />
                 </div>
             </section>
         </div>

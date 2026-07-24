@@ -5,6 +5,9 @@ import useSignUp from "../features/authentication/useSignUp";
 import Modal from "../components/Modal";
 import useGoogleSignIn from "../features/authentication/useGoogleSignIn";
 import { FcGoogle } from "react-icons/fc";
+import { GoLock } from "react-icons/go";
+import { HiOutlineMail } from "react-icons/hi";
+import { MdErrorOutline } from "react-icons/md";
 
 function Signup() {
     const {handleSignUp, isLoading, error} = useSignUp();
@@ -33,37 +36,55 @@ function Signup() {
                 <form className="flex flex-col gap-4 lg:gap-8" onSubmit={handleSubmit(onSubmit)}>
                     <div>
                         <label>Email</label>
-                        <input 
-                        type="email" 
-                        className="w-full border border-gray-300 rounded-md p-2 mt-1 outline-0"
-                        id="email"
-                        {...register("email", {
-                            required: "This field is required",          
-                            pattern: {
-                              value: /\S+@\S+\.\S+/,
-                              message: "Please provide a valid email address"
-                            }
-                        })}                        
-                        disabled={isLoading}
-                        /> 
-                        {errors.email && <p className="text-red-400">{errors.email.message}</p>}
+                        <div className="border border-gray-300 rounded-md p-2 mt-1 outline-0 flex items-center gap-2">
+                            <HiOutlineMail className="text-base text-stone-500" />
+                            <input 
+                            type="email"
+                            placeholder="yourname@gmail.com" 
+                            className="w-full outline-0"
+                            id="email"
+                            {...register("email", {
+                                required: "This field is required",          
+                                pattern: {
+                                    value: /\S+@\S+\.\S+/,
+                                    message: "Please provide a valid email address"
+                                }
+                            })}                        
+                            disabled={isLoading}
+                            /> 
+                        </div>
+                        {errors.email && (
+                            <div className="bg-red-100 flex items-center gap-1 mt-1 p-1 rounded-sm">
+                                <MdErrorOutline className="text-red-600 text-sm" />
+                                <p className="text-red-600">{errors.email.message}</p>
+                            </div>
+                        )}
                     </div>
                     <div>
                         <label>Password</label>
-                        <input 
-                        type="password" 
-                        className="w-full border border-gray-300 rounded-md p-2 mt-1 outline-0"
-                        id="password"
-                        {...register("password", {
-                            required: "Password is required", 
-                            minLength: {
-                                value: 8, 
-                                message: "Password must be at least 8 characters"
-                            }}
-                        )}                       
-                        disabled={isLoading}
-                        /> 
-                         {errors.password && <p className="text-red-400">{errors.password.message}</p>}
+                        <div className="border border-gray-300 rounded-md p-2 mt-1 outline-0 flex items-center gap-1">
+                            <GoLock className="text-base text-stone-500" />
+                            <input 
+                            type="password"
+                            placeholder="********" 
+                            className="w-full outline-0 placeholder:tracking-widest"
+                            id="password"
+                            {...register("password", {
+                                required: "Password is required", 
+                                minLength: {
+                                    value: 8, 
+                                    message: "Password must be at least 8 characters"
+                                }}
+                                )}                       
+                                disabled={isLoading}
+                                /> 
+                        </div>
+                         {errors.password && (
+                            <div className="bg-red-100 flex items-center gap-1 mt-1 p-1 rounded-sm">
+                                <MdErrorOutline className="text-red-600 text-sm" />
+                                <p className="text-red-600">{errors.password.message}</p>
+                            </div>
+                         )}
                     </div>
                     <Button type="primary">
                         {isLoading ? "Signing up..." : "Sign Up"}
@@ -73,7 +94,7 @@ function Signup() {
             </main>
             <div className="flex items-center gap-4">
                 <div className="w-full h-0.5 bg-stone-300"></div>
-                <p>or</p>
+                <p className="uppercase text-xs text-stone-500">or</p>
                 <div className="w-full h-0.5 bg-stone-300"></div>
             </div>
             <button 
@@ -84,10 +105,10 @@ function Signup() {
                 <FcGoogle className="text-lg" />
                 <span>Sign up with Google Account</span>
             </button>    
-            <p className="italic">
+            <p className="text-center">
                 Have an account? 
                 <Modal.Open opens="sign-in">
-                    <span className="text-blue-700 cursor-pointer hover:underline"> Log in</span>
+                    <span className="text-primary cursor-pointer hover:underline"> Log in</span>
                  </Modal.Open> 
             </p> 
         </div>

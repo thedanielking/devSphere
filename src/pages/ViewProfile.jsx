@@ -6,6 +6,7 @@ import usePublishedPosts from "../features/posts/usePublishedPosts";
 import StoriesList from "../components/StoriesList";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter, FaLink } from "react-icons/fa6";
+import NetworkError from "../components/NetworkError";
 
 function ViewProfile() {
     const {authorId} =  useParams();
@@ -24,8 +25,9 @@ function ViewProfile() {
     
 
     if(profileLoading) return <Spinner />;
+    if(profileError) return <NetworkError />
 
-    const [{avatar_url, full_name, bio, github_url, linkedIn_url, portfolio_url, twitter_url, role, created_at, updated_at}] = profile;
+    const [{avatar_url, full_name, bio, github_url, linkedIn_url, portfolio_url, twitter_url, role,}] = profile;
 
     return (
         <div className="py-10 px-2 space-y-6 lg:py-3.5 lg:px-10">

@@ -5,6 +5,9 @@ import Logo from "../components/Logo";
 import Modal from "../components/Modal";
 import useLogin from "../features/authentication/useLogin";
 import useGoogleSignIn from "../features/authentication/useGoogleSignIn";
+import { GoLock } from "react-icons/go";
+import { HiOutlineMail } from "react-icons/hi";
+import { MdErrorOutline } from "react-icons/md";
 
 
 function Login({onCloseModal}) {
@@ -42,47 +45,60 @@ function Login({onCloseModal}) {
                 <form className="flex flex-col gap-4 lg:gap-8" onSubmit={handleSubmit}>
                     <div>
                         <label>Email</label>
-                        <input 
-                        type="email" 
-                        className="w-full border border-gray-300 rounded-md p-2 mt-1 outline-0"
-                        id="email"
-                        onChange={(e)=> setEmail(e.target.value)} 
-                        disabled={isLoading || googleLoading }  /> 
+                        <div className="border border-gray-300 rounded-md p-2 mt-1 outline-0 flex items-center gap-2">
+                            <HiOutlineMail className="text-base text-stone-500" />
+                            <input 
+                            type="email"
+                            placeholder="yourname@gmail.com" 
+                            className="w-full outline-0"
+                            id="email"
+                            onChange={(e)=> setEmail(e.target.value)} 
+                            disabled={isLoading || googleLoading }  /> 
+                        </div>
                     </div>
                     <div>
                         <label>Password</label>
-                        <input 
-                        type="password" 
-                        className="w-full border border-gray-300 rounded-md p-2 mt-1 outline-0"
-                        id="password"
-                        onChange={(e)=> setPassword(e.target.value)}
-                        disabled={isLoading || googleLoading}
-                        /> 
+                        <div className="border border-gray-300 rounded-md p-2 mt-1 outline-0 flex items-center gap-1">
+                            <GoLock className="text-base text-stone-500" />
+                            <input 
+                            type="password"
+                            placeholder="********" 
+                            className="w-full outline-0 placeholder:tracking-widest"
+                            id="password"
+                            onChange={(e)=> setPassword(e.target.value)}
+                            disabled={isLoading || googleLoading}
+                            /> 
+                        </div>
                     </div>
                     <Button type="primary" disabled={isLoading || googleLoading}>
                         {isLoading ? "Logging in..." : "Log in"}
                     </Button>
                 </form>
-                {error && <p className="text-red-600">{error}</p>}            
+                {error && (
+                    <div className="bg-red-100 flex items-center gap-1 mt-1 p-1 rounded-sm">
+                        <MdErrorOutline className="text-red-600 text-sm" />
+                        <p className="text-red-600 text-xs">{error}</p>
+                    </div>
+                )}            
             </main>    
 
             <div className="flex items-center gap-4">
                 <div className="w-full h-0.5 bg-stone-300"></div>
-                <p>or</p>
+                <p className="uppercase text-xs text-stone-500">or</p>
                 <div className="w-full h-0.5 bg-stone-300"></div>
             </div>            
             <button 
                 onClick={handleGoogleLogin}
                 disabled={googleLoading}  
-                className="w-fit mx-auto cursor-pointer ring rounded-full px-4 py-2 flex items-center gap-2 hover:bg-stone-100 duration-300 disabled:cursor-not-allowed"
+                className="w-fit mx-auto cursor-pointer ring ring-stone-500 rounded-full px-4 py-2 flex items-center gap-2 hover:bg-stone-100 disabled:cursor-not-allowed"
                 >
                 <FcGoogle className="text-lg" />
                 <span>Sign In with Google Account</span>
             </button>
-            <p className="italic">
+            <p className="text-center text-stone-600">
                 Don't have an account? 
                 <Modal.Open opens="sign-up">
-                        <span className="text-blue-700 cursor-pointer hover:underline">Sign up</span>
+                        <span className="text-primary cursor-pointer hover:underline"> Sign up</span>
                 </Modal.Open>
             </p>
         </div>

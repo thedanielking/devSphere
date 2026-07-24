@@ -105,7 +105,7 @@ function Stories(){
                                 title="No bookmarks yet"
                                 description="Save stories you want to read later and they'll show up here."
                                 actionLabel="Browse stories"
-                                onAction={() => navigate("/posts")}
+                                actionTo="/posts"
                                 /> 
                         )
                     }

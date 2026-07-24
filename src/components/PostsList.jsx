@@ -3,6 +3,7 @@ import Post from "./Post";
 import SkeletonLoading from "./SkeletonLoading";
 import { LuFolderSearch } from "react-icons/lu";
 import EmptyStories from "./EmptyStories";
+import NetworkError from "./NetworkError";
 
 function PostsList({posts = [], isLoading, error}) {
     const skeletonCount = posts && posts.length > 0 ? posts.length : 6;
@@ -13,7 +14,9 @@ function PostsList({posts = [], isLoading, error}) {
                 ? (
                     <SkeletonLoading skeletonCount={skeletonCount} />
                 ) : error ? (
-                    <p>Error loading posts</p>
+                    <div className="md:col-span-2 lg:col-span-3 w-full flex items-center justify-center">
+                        <NetworkError />
+                    </div>
                 ) : posts.length === 0 ? (    
                     <div className="md:col-span-2 lg:col-span-3 w-full flex items-center justify-center">                
                         <EmptyStories

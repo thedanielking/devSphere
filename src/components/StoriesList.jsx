@@ -1,3 +1,4 @@
+import NetworkError from "./NetworkError";
 import SkeletonLoading from "./SkeletonLoading";
 import Story from "./Story";
 
@@ -10,9 +11,10 @@ function StoriesList({posts = [], isLoading, error, isPublished, onRefresh, isRe
                 ? (
                     <SkeletonLoading skeletonCount={skeletonCount} />
                 ) : error ? (
-                    <p>Error loading posts</p>
-                ) : (
-                    
+                    <div className="md:col-span-2 lg:col-span-3 w-full flex items-center justify-center">
+                        <NetworkError />
+                    </div>
+                ) : (                    
                         posts.map(post => (
                             <Story key={post.id} post={post} isPublished={isPublished} onRefresh={onRefresh} isReaderView={isReaderView} />
                         ))
