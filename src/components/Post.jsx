@@ -13,7 +13,7 @@ import { IoBookmark } from "react-icons/io5";
 
 function Post({post}) {
     const {profile, loading: profileLoading, error: profileError, fetchProfile} = useProfile();
-    const {title, summary, read_time, created_at, cover_image_url, id, author_id } = post;
+    const {title, summary, read_time, created_at, cover_image_url, id, author_id, views_count } = post;
 
     const {loading, error, isBookmarked, bookmarkPost, removePostBookmark} = useBookmark(id);
     const navigate = useNavigate();
@@ -74,7 +74,7 @@ function Post({post}) {
                     <div className="flex justify-between">
                         <div className="flex items-center gap-1 text-slate-600 text-xs">                           
                             <p>
-                                {read_time} mins read &bull;
+                                {read_time} mins read &bull; {views_count} views
                             </p>                            
                         </div>
                         <div className="flex items-center gap-1">

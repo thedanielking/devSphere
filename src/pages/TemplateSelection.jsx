@@ -14,49 +14,49 @@ function TemplateSelection() {
             title: "Build Log",
             description: "Document a project you've been building.",
             gradientClass: "from-violet-100 to-indigo-50",
-            icon: <FaRocket className="text-4xl text-violet-500" />
+            icon: <FaRocket className="text-3xl lg:text-4xl text-violet-500" />
         },
         {
             id: "architecture-decision",
             title: "Architecture Decision",
             description: "Explain why you chose a technical solution.",
             gradientClass: "from-emerald-100 to-teal-50",
-            icon: <FaDiagramProject className="text-4xl text-emerald-500" />
+            icon: <FaDiagramProject className="text-3xl lg:text-4xl text-emerald-500" />
         },
         {
             id: "refactor-story",
             title: "Refactor Story",
             description: "Walk through improving existing code.",
             gradientClass: "from-orange-100 to-amber-50",
-            icon: <FaScrewdriverWrench className="text-4xl text-orange-500" />
+            icon: <FaScrewdriverWrench className="text-3xl lg:text-4xl text-orange-500" />
         },
         {
             id: "bug-fix-journey",
             title: "Bug fix Journey",
             description: "Explain how you diagnosed and fixed an issue.",
             gradientClass: "from-red-100 to-rose-50",
-            icon: <FaBug className="text-4xl text-red-500" />
+            icon: <FaBug className="text-3xl lg:text-4xl text-red-500" />
         },
         {
             id: "tutorial",
             title: "Tutorial",
-            description: "Start from scratch",
+            description: "Create a step-by-step guide to teach a concept.",
             gradientClass: "from-sky-100 to-cyan-50",
-            icon: <FaBookOpen className="text-4xl text-sky-500" />
+            icon: <FaBookOpen className="text-3xl lg:text-4xl text-sky-500" />
         },
         {
             id: "post-mortem",
             title: "Post Mortem",
-            description: "Start from scratch",
+            description: "Analyze what went wrong during a system outage or failure.",
             gradientClass: "from-yellow-100 to-orange-50",
-            icon: <FaTriangleExclamation className="text-4xl text-yellow-500" />
+            icon: <FaTriangleExclamation className="text-3xl lg:text-4xl text-yellow-500" />
         },
         {
             id: "blank-story",
             title: "Blank Story",
             description: "Start from scratch",
             gradientClass: "from-slate-100 to-slate-50",
-            icon: <FaRegPenToSquare className="text-4xl text-slate-500" />
+            icon: <FaRegPenToSquare className="text-3xl lg:text-4xl text-slate-500" />
         }
     ];
 
@@ -73,7 +73,7 @@ function TemplateSelection() {
             </div>
 
             {/* templates grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-10 lg:gap-20">
                 {templatesList.map((item) => {
                     const isActive = template === item.id;
 

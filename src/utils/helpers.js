@@ -45,11 +45,11 @@ export const sortByLatest = (posts) => {
   });
 };
 
-// Sort posts by popular (likes_count)
+// Sort posts by popular (views_count)
 export const sortByPopular = (posts) => {
   if (!Array.isArray(posts)) return [];
   return [...posts].sort((a, b) => {
-    return (b.likes_count || 0) - (a.likes_count || 0); // highest likes first
+    return (b.views_count || 0) - (a.views_count || 0); // highest views first
   });
 };
 

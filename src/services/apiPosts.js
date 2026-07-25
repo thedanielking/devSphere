@@ -203,6 +203,19 @@ export async function writePost(post, postId) {
   return data;
 }
 
+export async function incrementPostViews(postId) {
+  if (!postId) return;
+
+  const { error } = await supabase.rpc("increment_views_count", {
+    post_id: postId, // Must match the argument name specified in the SQL script
+  });
+
+  if (error) {
+    console.error("Failed to update views count:", error.message);
+    throw new Error(error.message);
+  }
+}
+
 
 export async function deletePost(postId){
     const {error} = await supabase

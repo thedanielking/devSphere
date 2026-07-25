@@ -7,11 +7,13 @@ import Spinner from "../components/Spinner";
 import useProfile from "../features/profiles/useProfile";
 import { formatDateFns} from "../utils/helpers";
 import NetworkError from "../components/NetworkError"
+import useIncrementViewsCount from "../features/posts/useIncrementViewsCount";
 
 function PostPage() {
     const {postId} = useParams();
     const {post, isLoading: postLoading, error: postError, fetchPostById} = usePosts();
     const {profile, loading: profileLoading, error: profileError, fetchProfile} = useProfile();
+    const {incrementViewCount} = useIncrementViewsCount();
     const navigate = useNavigate();
  
 
@@ -20,14 +22,17 @@ function PostPage() {
     }
 
     useEffect(()=> {
-        if(postId)
+        if(postId){
             fetchPostById(postId);
+            incrementViewCount(postId);
+        }
     }, [postId])
 
     useEffect(()=> {
         if(post?.author_id)
             fetchProfile(post?.author_id)
-    }, [post?.author_id]);  
+    }, [post?.author_id]); 
+     
 
     if(postError || profileError) return (
         <NetworkError />
