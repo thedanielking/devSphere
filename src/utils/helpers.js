@@ -53,19 +53,29 @@ export const sortByPopular = (posts) => {
   });
 };
 
-export const filterPosts = (posts, selectedTags) => {
+export const filterPosts = (posts, selectedTagIds) => {
   if (!Array.isArray(posts)) return [];
-  if (!selectedTags || selectedTags.length === 0) return posts;
+  if (!selectedTagIds || selectedTagIds.length === 0) return posts;
 
+  // Ensure all incoming IDs are normalized to lowercase strings
+  const targetIds = selectedTagIds.map(id => String(id).trim().toLowerCase());
+  
   return posts.filter((post) => {
-    if (!post.tags) return false; // skips if there are no tags in that post
+    // 1. Extract and split post tags (handles Array, comma String, or null)
     
-    // Handle if tags is a string (comma-separated) or array
-    const postTags = Array.isArray(post.tags) 
-      ? post.tags 
-      : String(post.tags).split(",").map(tag => tag.trim());
-       
-    // Check if any of the post's tags are in the selectedTags
-    return postTags.some((tag) => selectedTags.includes(tag));
+    const postTags = Array.isArray(post.tags)
+      ? post.tags
+      : post.tags
+        ? String(post.tags).split(",").map(t => t.trim().toLowerCase())
+        : [];
+
+    // 2. Extract template value (handles string ID like 'build-log' or null)
+    const postTemplate = post.template ? String(post.template).trim().toLowerCase() : "";
+    
+    // 3. Check if template ID matches OR if any post tags match
+    const matchesTemplate = targetIds.includes(postTemplate);
+    const matchesTags = postTags.some((tag) => targetIds.includes(tag));
+    
+    return matchesTemplate || matchesTags;
   });
-};
+}

@@ -1,10 +1,12 @@
 import { GoCheck } from "react-icons/go";
 
-function Tags({tag, type, onSelect, isSelected}) {
+function Tags({tag, tagId, type, onSelect, isSelected, Icon}) {
 
     function handleSelect(){
-        onSelect(tag);
+        onSelect(tagId);
     }
+
+    
 
     if(type === "filter"){
         return (
@@ -16,7 +18,8 @@ function Tags({tag, type, onSelect, isSelected}) {
     }
 
     return (
-        <li className={`capitalize font-medium ring ring-stone-200 p-3 rounded-xl bg-white text-xs lg:text-sm ${!type && `shadow-lg`} ${type && `bg-stone-100`}`}>
+        <li className={`capitalize cursor-pointer font-medium flex items-center gap-2 ring ring-stone-200 p-3 rounded-xl bg-white text-xs lg:text-sm ${!type && `shadow-lg`} ${type && `bg-stone-100`}`} onClick={handleSelect}>
+            {Icon}
             <span>{tag}</span>
         </li>
     )

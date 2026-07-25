@@ -24,7 +24,7 @@ function FilterBar() {
         updateUrl(next);
     }
 
-    const filterTags = ["javascript", "react", "css", "node.js", "python", "beginners", "growth", "supabase"];
+    
     return (
         <div className="relative">
             <GoFilter
@@ -36,12 +36,22 @@ function FilterBar() {
                     <p className="px-3 py-1 font-semibold">{filterTags.length} tags(scroll for more)</p>
                     <hr className="text-stone-100"/>
                     {filterTags.map((tag, index) => (
-                        <Tags key={index} tag={tag} type="filter" onSelect={onSelect} isSelected={selectedTags.includes(tag)} />
+                        <Tags key={tag.id} tag={tag.label} tagId={tag.id} type="filter" onSelect={onSelect} isSelected={selectedTags.includes(tag.id)} />
                     ))}
                 </div>
             )}
         </div>
     );
 }
+
+export const filterTags = [
+    { label: "Build Logs", id: "build-log" },
+    { label: "Arch. Decisions", id: "architecture-decision" },
+    { label: "Bug fixes", id: "bug-fix-journey" },
+    { label: "Refactor Stories", id: "refactor-story" },
+    { label: "Tutorials", id: "tutorial" },
+    { label: "Post Mortems", id: "post-mortem" },
+    { label: "Lesson Learned", id: "lesson-learned" } // Custom tag placeholder
+  ];
 
 export default FilterBar;

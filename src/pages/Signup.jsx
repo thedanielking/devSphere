@@ -2,8 +2,8 @@ import Button from "../components/Button"
 import Logo from "../components/Logo"
 import { useForm } from "react-hook-form";
 import useSignUp from "../features/authentication/useSignUp";
-import Modal from "../components/Modal";
 import useGoogleSignIn from "../features/authentication/useGoogleSignIn";
+import Modal from "../components/Modal";
 import { FcGoogle } from "react-icons/fc";
 import { GoLock } from "react-icons/go";
 import { HiOutlineMail } from "react-icons/hi";
