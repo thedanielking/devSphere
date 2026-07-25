@@ -4,10 +4,20 @@ import { useAuth } from "../context/AuthContext";
 import Modal from "./Modal";
 import { GoPerson } from "react-icons/go";
 import { LuPanelLeftClose, LuPanelRightClose } from "react-icons/lu";
+import useProfile from "../features/profiles/useProfile";
+import { useEffect } from "react";
 
 
 function Navbar({toggleSideNav, display}) {
-    const { user } =  useAuth(); 
+    const { user } =  useAuth();
+    const userId = user?.id;
+    const {profile, loading, error, fetchProfile} = useProfile();
+
+    useEffect(()=>{
+        if(!userId) return;
+        fetchProfile(userId);
+    }, [userId])
+
     
     return (
         <nav className="flex justify-between items-center px-1 lg:px-5 py-3 w-full lg:max-w-xl  mx-auto sticky top-0 z-10  backdrop-blur-lg bg-white/30 border-b border-white border-opacity-30 shadow-lg lg:rounded-full lg:mt-10">
@@ -24,7 +34,11 @@ function Navbar({toggleSideNav, display}) {
                 {user 
                 ? ( 
                     <Link to="/profile">
-                        <GoPerson className="text-primary text-xl"/>
+                        {profile ? (
+                        <div className="w-7 h-7 overflow-hidden  ring-primary-darker rounded-full">
+                            <img src={profile[0]?.avatar_url} alt="avatar" crossOrigin="anonymous" className="w-full h-full object-cover" />
+                        </div>
+                        ) : <GoPerson className="text-primary text-xl"/>}
                     </Link>
                 )
                 : (
