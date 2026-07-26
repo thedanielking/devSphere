@@ -15,6 +15,7 @@ import Settings from "./pages/Settings";
 import ProtectedRoute from "./components/ProtectedRoute";
 import TemplateSelection from "./pages/TemplateSelection";
 import ViewProfile from "./pages/ViewProfile";
+import Error404 from "./components/Error404";
 
 
 function App() {
@@ -57,8 +58,11 @@ function App() {
               <Settings />
             </ProtectedRoute >
           } />
-
+          
         </Route>
+
+        <Route path="*" element={<Error404 />} />
+
       </Routes>
     </BrowserRouter>
     <Toaster 
