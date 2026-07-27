@@ -50,7 +50,7 @@ function StoryEditor({ content, onChange, error }) {
         </code>
         , and{" "}
         <code className="font-mono bg-stone-100 px-1 py-0.5 rounded text-stone-500">
-          ## headings
+          # headings(# h1, ## h2, ### h3,...)
         </code>{" "}
         to format your post.
       </p>

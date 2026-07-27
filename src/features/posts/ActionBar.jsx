@@ -90,7 +90,7 @@ function ActionBar({ isEditMode, onSaveDraft, onPublish, isPublishing, isSaving 
             "
           >
             {isPublishing ? (
-              "Publishing…"
+              isEditMode ? "Updating..." : "Publishing…"
             ) : (
               <>
                 {/* Publish icon */}

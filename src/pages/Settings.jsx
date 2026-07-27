@@ -85,7 +85,7 @@ function Settings() {
                 </form>
             </div>
 
-            <div>
+            {/* <div>
                 <h2 className="text-lg font-medium">Notifications Settings</h2>
                 <p className="text-stone-600 lg:text-xl">
                     We may send you notifications about your account activity and updates. You can manage your notification preferences in your account settings.
@@ -129,7 +129,7 @@ function Settings() {
                         Update Preferences
                     </button>
                 </form>
-            </div>
+            </div> */}
 
             <div className="border-t border-stone-300 pt-5 mt-10">
                 <h2 className="text-lg font-medium">Account Deletion</h2>

@@ -54,10 +54,10 @@ function SideNavBar({display, toggleSideNav}) {
                 <span>Stories</span>
             </Link>
 
-            <Link to={"/settings"} className="px-3 py-4 flex items-center gap-2 hover:bg-white/30 cursor-pointer rounded ">
+            {/* <Link to={"/settings"} className="px-3 py-4 flex items-center gap-2 hover:bg-white/30 cursor-pointer rounded ">
                 <CiSettings className="text-primary text-xl" />
                 <span>Settings</span>
-            </Link>
+            </Link> */}
 
             {user && (
                 <Modal.Open opens={"logout"}>

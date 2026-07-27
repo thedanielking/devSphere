@@ -86,9 +86,7 @@ function WritePost() {
           .filter(Boolean)
         .join(",");
 
-        console.log(normalizedTags)
-        console.log(coverImage)
-
+        
       writePost(
           {
               ...form,

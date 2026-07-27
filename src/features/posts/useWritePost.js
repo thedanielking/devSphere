@@ -33,7 +33,7 @@ function useWritePost(user) {
                 author_id: user.id,
             }, postId)
             toast.success(`Post ${published ? "published" : "saved as draft"} successfully`);
-            navigate(published ? `/posts/${slug}` : '/posts');
+            navigate(published ? `/posts/${postId}/${slug}` : '/posts');
         }
         catch(err){
             const message = err?.message;
