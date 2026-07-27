@@ -44,9 +44,12 @@ function Post({post}) {
         }
     };
 
-    const handleProfileClick = (e, authorId) => {
+    const handleProfileClick = (e, authorId, authorFullName) => {
         e.stopPropagation(); // Stops click from triggering navigate
-        if(authorId) navigate(`/profile/${authorId}`); // Navigate directly to user profile
+        if(authorId) {
+            const userHandle = `${slugify(authorFullName)}-${authorId}`;            
+            navigate(`/profile/${userHandle}`)
+        } // Navigate directly to user profile
     };
     
     useEffect(()=> {
@@ -85,7 +88,7 @@ function Post({post}) {
                     <div className="flex items-center justify-between">
                         <div className="flex gap-1 items-center text-slate-600">
                             <div 
-                                onClick={(e) => handleProfileClick(e, author_id)}
+                                onClick={(e) => handleProfileClick(e, author_id, profile[0]?.full_name)}
                                 className="flex gap-1 items-center text-slate-600 hover:text-primary transition-colors z-10"
                             >
                                 by

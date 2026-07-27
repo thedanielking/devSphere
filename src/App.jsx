@@ -29,7 +29,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signUp" element={<Signup />} />
           <Route path="/posts" element={<Posts />} />
-          <Route path="/profile/:authorId" element={<ViewProfile />} />
+          <Route path="/profile/:userHandle" element={<ViewProfile />} />
           <Route path="/stories" element={<Stories />} />
           <Route path="/posts/:postId/:slug" element={<PostPage />} />
           <Route path="/stories/write" element={

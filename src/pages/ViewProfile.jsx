@@ -9,7 +9,10 @@ import { FaXTwitter, FaLink } from "react-icons/fa6";
 import NetworkError from "../components/NetworkError";
 
 function ViewProfile() {
-    const {authorId} =  useParams();
+    const {userHandle} =  useParams();
+    const handleParts = userHandle?.split("-") || [];
+    // Re-combine the UUID parts from the end of the string
+    const authorId = handleParts.slice(-5).join("-"); // Extracts: "d4b9e2a1-3c4d-5e6f-7a8b-9c0d1e2f3a4b"
 
     const {profile, loading: profileLoading, error: profileError, fetchProfile} = useProfile();
     const {isLoading: postsLoading, error: postsError, posts, fetchPosts} = usePublishedPosts();
