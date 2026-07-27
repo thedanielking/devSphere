@@ -43,7 +43,7 @@ function StoryOptions({isPublished, postId, title, onRefresh}) {
 
 
     return (
-        <div className="absolute z-40 -bottom-28 right-0 bg-white rounded-lg drop-shadow-xl py-4 w-60 space-y-2 md:w-90 lg:w-62 md:space-y-3 md:-bottom-65 lg:-bottom-32">
+        <div className="absolute z-40 -bottom-36 right-0 bg-white rounded-lg drop-shadow-xl py-4 w-60 space-y-2 md:w-90 lg:w-62 md:space-y-3 md:-bottom-65 lg:-bottom-42">
             {isPublished !== "draft" && 
             <>
             <p className="hover:font-medium flex gap-2 items-center px-4 mb-2 md:text-sm cursor-pointer" onClick={handleCopyLinkClick}>
@@ -53,17 +53,17 @@ function StoryOptions({isPublished, postId, title, onRefresh}) {
             <hr className="text-neutral-200"/>
             </>
             }
-            <ul className="space-y-4 px-4 md:text-sm">
-                {isPublished === "bookmarked" && <Link to={`/posts/${postId}/${slug}`} className="hover:font-medium  flex gap-2 items-center">
+            <ul className="space-y-2 px-4 md:text-sm">
+                {isPublished !== "draft" && <Link to={`/posts/${postId}/${slug}`} className="hover:font-medium  flex gap-2 items-center">
                     <GoEye />
                     <span>View Story</span>
                 </Link>}
+                <hr className="text-neutral-200"/>
 
                 {isPublished !== "bookmarked" && <Link to={`/stories/write/edit/${postId}`} className="hover:font-medium  flex gap-2 items-center">
                     <GoPencil />
                     <span>Edit Story</span>
                 </Link>}
-                <hr className="text-neutral-200"/>
 
                 {isPublished === "draft" && 
                 <Link className="hover:font-medium flex gap-2 items-center">
@@ -95,7 +95,7 @@ function StoryOptions({isPublished, postId, title, onRefresh}) {
             <Modal.Window name="delete">
                 <ConfirmAction onClick={handleDeletePost} 
                 icon={<GoTrash className="text-lg"/>} 
-                action={"delete"} loading={deleteLoading} />
+                action={"delete this post"} loading={deleteLoading} />
             </Modal.Window>
 
             <Modal.Window name="removeBookmark">

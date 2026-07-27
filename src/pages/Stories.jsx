@@ -10,6 +10,7 @@ import EmptyStories from "../components/EmptyStories";
 import { FaRegFolderOpen } from "react-icons/fa6";
 import { FiGlobe } from "react-icons/fi";
 import { FiBookmark } from "react-icons/fi";
+import NetworkError from "../components/NetworkError";
 
 function Stories(){
     const {user} = useAuth();
@@ -55,7 +56,7 @@ function Stories(){
                 <div>
                     {
                         draftsError ? (
-                            <div>{draftsError}</div>
+                            <NetworkError />
                         ) : (
                             draftedPosts.length > 0 ? 
                             <StoriesList posts={draftedPosts} isLoading={isLoadingDrafts} error={draftsError} isPublished="draft"
@@ -74,7 +75,7 @@ function Stories(){
                     <div>
                     {
                         publishedError ? (
-                            <div>{publishedError}</div>
+                            <NetworkError />
                         ) : (
                             publishedPosts.length > 0 ? 
                             <StoriesList posts={publishedPosts} isLoading={isLoadingPublished} error={publishedError}
@@ -94,7 +95,7 @@ function Stories(){
                     <div>
                     {
                         bookmarkedError ? (
-                            <div>{bookmarkedError}</div>
+                            <NetworkError />
                         ) : (
                             bookmarkedPosts.length > 0 ? 
                             <StoriesList posts={bookmarkedPosts} isLoading={isLoadingBookmarked} error={bookmarkedError}

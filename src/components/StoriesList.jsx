@@ -1,6 +1,8 @@
 import NetworkError from "./NetworkError";
 import SkeletonLoading from "./SkeletonLoading";
 import Story from "./Story";
+import { FaRegFolderOpen } from "react-icons/fa";
+import EmptyStories from "./EmptyStories";
 
 function StoriesList({posts = [], isLoading, error, isPublished, onRefresh, isReaderView }) {
     const skeletonCount = posts && posts.length > 0 ? posts.length : 6;
@@ -13,6 +15,15 @@ function StoriesList({posts = [], isLoading, error, isPublished, onRefresh, isRe
                 ) : error ? (
                     <div className="md:col-span-2 lg:col-span-3 w-full flex items-center justify-center">
                         <NetworkError />
+                    </div>
+                ): posts.length === 0 ? (
+                    <div className="md:col-span-2 lg:col-span-3 w-full flex items-center justify-center">                
+                        <EmptyStories
+                            icon={FaRegFolderOpen}
+                            title=""
+                            description="This user has not made a post yet"
+                                                        
+                          />
                     </div>
                 ) : (                    
                         posts.map(post => (
