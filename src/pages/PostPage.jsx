@@ -22,17 +22,29 @@ function PostPage() {
         navigate(-1);
     }
 
-    useEffect(()=> {
-        if(postId){
+    
+    useEffect(() => {
+        if (postId) {
             fetchPostById(postId);
-            incrementViewCount(postId);
         }
-    }, [postId])
+    }, [postId]);
 
-    useEffect(()=> {
-        if(post?.author_id)
-            fetchProfile(post?.author_id)
-    }, [post?.author_id]); 
+    
+    useEffect(() => {
+        if (post?.author_id && postId) {
+            // Fetch profile metrics
+            fetchProfile(post.author_id);
+
+            // Run session storage check safely here (No more layout shifts!)
+            const storageKey = `viewed_post_${postId}`;
+            if (!sessionStorage.getItem(storageKey)) {
+                sessionStorage.setItem(storageKey, "true"); // Write immediately BEFORE the async call
+                incrementViewCount(postId);
+            }
+        }
+    }, [post?.author_id, postId]); // Triggers precisely when the post object finishes downloading
+
+    
      
 
     if(postError || profileError) return (
