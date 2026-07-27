@@ -8,6 +8,7 @@ import SideNavBar from "./SideNavBar";
 import Modal from "./Modal";
 import ConfirmAction from "./ConfirmAction";
 import useLogout from "../features/authentication/useLogout";
+import Footer from "./Footer";
 
 
 function AppLayout() {
@@ -35,6 +36,8 @@ function AppLayout() {
                         <Outlet />
                     </div>
                 </main>
+                
+                <Footer />
                 
                 <Modal.Window name="sign-in">
                     <Login />
