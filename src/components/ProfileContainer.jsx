@@ -1,6 +1,6 @@
 import ProfileEdit from "./ProfileEdit";
 import Modal from "./Modal";
-import { formatDateFns } from "../utils/helpers";
+// import { formatDateFns } from "../utils/helpers";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter, FaLink } from "react-icons/fa6";
 
@@ -10,15 +10,15 @@ function ProfileContainer({profile, refetchProfile}) {
     const [{avatar_url, full_name, bio, github_url, linkedIn_url, portfolio_url, twitter_url, role, created_at, updated_at}] = profile;
 
  
-    const date_joined = formatDateFns(created_at);
-    const date_updated = formatDateFns(updated_at);
+    // const date_joined = formatDateFns(created_at);
+    // const date_updated = formatDateFns(updated_at);
 
  
     return (
         <div className="p-8 ring-1 ring-gray-300 rounded-lg space-y-9 flex flex-col justify-center lg:px-12 lg:py-10">
             <div className="flex items-center gap-6">
                 <picture className="w-32 h-32 rounded-full overflow-hidden ring ring-primary lg:w-35 lg:h-35">
-                    <img src={avatar_url || "../team3.jpg"} alt="profile picture" className="w-full h-full object-cover" crossOrigin="anonymous" />
+                    <img src={avatar_url || "../person.png"} alt="profile picture" className="w-full h-full object-cover" crossOrigin="anonymous" />
                 </picture>
                 <div className="space-y-1">
                     <h2 className="text-lg font-medium capitalize lg:text-xl">

@@ -66,7 +66,7 @@ function Story({post, isPublished, onRefresh, isReaderView }) {
                             className="flex gap-1 items-center text-slate-600 hover:text-primary transition-colors z-10"
                             >
                             by
-                            <img src={profile[0]?.avatar_url || "./team3.jpg"} alt="avatar" className="w-6 h-6 rounded-full" crossOrigin="anonymous"/>
+                            <img src={profile[0]?.avatar_url || "./team3.jpg"} alt="avatar" className="w-6 h-6 rounded-full object-cover" crossOrigin="anonymous"/>
                             <p className="text-slate-600"> 
                                 <i className="hover:underline font-medium">{profile[0]?.full_name || "User"}</i>
                             </p>

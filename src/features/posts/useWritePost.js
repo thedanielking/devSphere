@@ -35,10 +35,10 @@ function useWritePost(user) {
             toast.success(`Post ${published ? "published" : "saved as draft"} successfully`);
 
             if(postId){
-                navigate(published ? `/posts/${postId}/${slug}` : '/posts');
+                navigate(published ? `/posts/${postId}/${slug}` : '/stories');
             }
             else{
-                navigate(published ? `/stories` : '/posts');
+                navigate(`/stories`);
             }
         }
         catch(err){
