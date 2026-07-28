@@ -12,9 +12,9 @@ function useSignUp() {
             setIsLoading(true);
             setError(null);
             await signUp({email, password});
-            toast.success("Signed Up successfully");
             if(typeof onSucess === "function") onSucess();
-            navigate("/login");
+            
+            toast.success("Signed Up successfully");
         }
         catch (err){
             const message= err?.message;
