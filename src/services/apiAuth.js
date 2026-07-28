@@ -31,7 +31,8 @@ export async function googleSignIn() {
         provider: 'google',
         options: {
           // Redirects back to your local React site after a successful login
-          redirectTo: 'http://localhost:5173', 
+            //   redirectTo: 'http://localhost:5173', 
+            redirectTo: 'https://devsphereng.vercel.app/', 
         },
     });
 
