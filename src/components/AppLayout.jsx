@@ -37,7 +37,7 @@ function AppLayout() {
                     </div>
                 </main>
                 
-                <Footer />
+                {/* <Footer /> */}
                 
                 <Modal.Window name="sign-in">
                     <Login />

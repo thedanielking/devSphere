@@ -40,7 +40,7 @@ function Story({post, isPublished, onRefresh, isReaderView }) {
     
     return (
         <div onClick={()=> handlePostClick()} className="relative flex gap-4 rounded-lg cursor-pointer shadow lg:w-full">
-            <picture className="hidden md:block flex-2 md:flex-1">
+            <picture className="hidden md:block flex-2 md:flex-1 max-h-40">
                 <source srcSet={cover_image_url } type="image/jpg" crossOrigin="anonymous" />
                 <img src={cover_image_url } alt="post image" className="w-full h-full object-cover rounded-lg transition duration-300 ease-in-out transform hover:scale-102" crossOrigin="anonymous"/>
             </picture>
