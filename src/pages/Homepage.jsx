@@ -1,13 +1,11 @@
 import usePosts from "../features/posts/usePosts";
 import Filter from "../components/Filter"
 import Header from "../components/Header"
-import Post from "../components/Post";
-import SkeletonLoading from "../components/SkeletonLoading";
 import PostsList from "../components/PostsList";
 
 function Homepage() {
     const {isLoading, posts, error} = usePosts();
-    const limit = 3;
+    const limit = 6;
     const popularPosts = posts.slice(0, limit).map(post => {
         return post;
     })  

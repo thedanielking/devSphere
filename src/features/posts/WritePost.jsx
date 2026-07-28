@@ -135,7 +135,7 @@ function WritePost() {
     
     return (
       <div className="min-h-screen">
-          <div className="max-w-4xl mx-auto px-4 py-8 pb-32">
+          <div className="max-w-4xl mx-auto lg:px-4 py-8 pb-32">
 
               {/* ── Page header ───────────────────────────────────────────────── */}
               <div className="mb-8 space-y-4">
@@ -179,7 +179,7 @@ function WritePost() {
                       error={errors.cover_image_url}
                   />
 
-                  <div className="px-3 md:px-6 py-8 md:py-10 space-y-5 md:space-y-10">
+                  <div className=" md:px-6 py-8 md:py-10 space-y-5 md:space-y-10">
                       <StoryDetailsSection
                           title={form.title}
                           summary={form.summary}

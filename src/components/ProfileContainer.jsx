@@ -60,19 +60,19 @@ function ProfileContainer({profile, refetchProfile}) {
             <div className="space-y-2 lg:space-y-3">
                 <h3 className="text-lg font-medium lg:text-xl">Links</h3>
                 <div className="flex items-center">
-                    <a href={github_url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
+                    <a href={github_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
                         <FaGithub className="text-base" />
                     </a>
                     <span className="mx-2 text-gray-500">|</span>
-                    <a href={linkedIn_url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
+                    <a href={linkedIn_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
                         <FaLinkedin className="text-base" />
                     </a>
                     <span className="mx-2 text-gray-500">|</span>
-                    <a href={twitter_url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
+                    <a href={twitter_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
                         <FaXTwitter className="text-base" />
                     </a>
                     <span className="mx-2 text-gray-500">|</span>
-                    <a href={portfolio_url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
+                    <a href={portfolio_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
                         <FaLink className="text-base" />
                     </a>
 

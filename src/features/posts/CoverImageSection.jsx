@@ -35,7 +35,7 @@ function CoverImageSection({ coverImageUrl, onChange, error }) {
           <img
             src={imageSrc}
             alt="Cover preview"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover aspect-video"
             crossOrigin="anonymous"
           />
 

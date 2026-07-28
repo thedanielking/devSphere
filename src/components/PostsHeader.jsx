@@ -11,7 +11,7 @@ function PostsHeader() {
                     <FilterBar />
                     <SearchBar />
                 </div>
-                <div className="flex gap-5">
+                <div className="flex flex-wrap gap-5">
                     <SortBy />
                     <WritePostButton />
                 </div>

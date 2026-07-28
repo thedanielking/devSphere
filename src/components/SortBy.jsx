@@ -13,7 +13,7 @@ function SortBy() {
     }
 
     const activeClass = (name) =>
-        `flex items-center gap-2 rounded-full px-5 py-2 ${sortBy === name ? "bg-primary/10 ring ring-primary" : "ring ring-stone-400"}`
+        `flex items-center gap-2 rounded-full px-3 lg:px-5 py-1 lg:py-2 ${sortBy === name ? "bg-primary/10 ring ring-primary" : "ring ring-stone-400"}`
 
     return (
         <div className="flex items-center gap-5">

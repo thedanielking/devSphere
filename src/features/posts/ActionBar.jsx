@@ -16,14 +16,14 @@ function ActionBar({ isEditMode, onSaveDraft, onPublish, isPublishing, isSaving 
 
   return (
     <div className="
-      fixed bottom-0 w-full z-50
+      fixed bottom-10 w-full z-5
       bg-white/90 backdrop-blur-md
       border-t border-stone-200
     ">
-      <div className="md:max-w-4xl md:mx-auto w-full px-10 lg:px-4 py-4 flex items-center justify-between gap-4">
+      <div className="md:max-w-4xl md:mx-auto w-full px-2 lg:px-4 py-4 flex items-center justify-center md:justify-between gap-4">
 
         {/* ── Left: hint text ───────────────────────────────────────── */}
-        <p className="text-xs text-stone-400 truncate">
+        <p className="hidden lg:block text-xs text-stone-400 truncate">
           "All fields are required before publishing."
         </p>
 

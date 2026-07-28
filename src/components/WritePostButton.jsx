@@ -17,7 +17,7 @@ function WritePostButton() {
     }
 
     return (
-        <div onClick={writePost} className="px-4 py-1 rounded flex items-center gap-2 bg-primary cursor-pointer">
+        <div onClick={writePost} className="px-4 py-2 rounded flex items-center gap-2 bg-primary cursor-pointer">
             <TbPencilCode className="text-xl text-white" />
             <p className="text-white text-sm lg:text-base">Write</p>
         </div>
