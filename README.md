@@ -294,9 +294,9 @@ This is a personal portfolio project, but:
 
 **Developer:** Daniel (Frontend Developer)
 
-* LinkedIn: *Add your link here*
-* Portfolio: *Add your link here*
-* Email: *Add your email here*
+* LinkedIn: *www.linkedin.com/in/theezedaniel*
+* Portfolio: *ezedaniel.vercel.app*
+* Email: *theezedaniel@gmail.com*
 
 ---
 
