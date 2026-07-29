@@ -25,6 +25,10 @@ function Open({children, opens: opensWindowName}){
 
     return cloneElement(children, {
         onClick: (e) => {
+            // CRITICAL FIX: Stop the click from traveling past this button element!
+            // This prevents your outer useOutsideClick hooks from intercepting the event
+            e.preventDefault();
+            e.stopPropagation();
             children.props?.onClick?.(e);
             open(opensWindowName);
         }})
@@ -37,7 +41,7 @@ function Window({children, name}){
     if(name !== openName) return null;
 
     return createPortal (
-        <div className="fixed top-0 left-0 w-full h-screen bg-black/20 backdrop-blur-sm transition-all duration-500 z-50">
+        <div className="fixed top-0 left-0 w-full h-screen bg-black/25 backdrop-blur-[4px] z-50 flex items-center justify-center animate-fade-in">
             <StyledModal ref={ref}>
                 <button className="p-1.5 rounded-sm absolute top-5 right-7 group hover:bg-primary cursor-pointer" onClick={close}>
                     <HiXMark className="text-xl group-hover:text-white" />

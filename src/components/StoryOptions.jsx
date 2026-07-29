@@ -13,19 +13,15 @@ function StoryOptions({isPublished, postId, title, onRefresh, onClose}) {
     
     // 2. Pass 'onClose' to your custom outside click hook instead of the undefined 'close' string
     const ref = useOutsideClick(onClose);
-    
     const {loading: deleteLoading, deletePost} = useDeletePost(); 
     const {loading: bookmarkedLoading, removePostBookmark} = useBookmark(postId);
+    
+    
     const {handleCopyLink, copied} = useCopyLinkButton();
 
     const slug = slugify(title);
     
-    function handleDeletePost(){
-        if(!postId) return;
-        deletePost(postId);
-        if(onRefresh) onRefresh();
-        if(onClose) onClose(); // 3. Cleanly close menu list items upon successful deletion
-    }
+    
 
     function handleCopyLinkClick(e){
         e.stopPropagation(); // 4. Block event bubbling from resetting the outside-click hook context
@@ -92,19 +88,8 @@ function StoryOptions({isPublished, postId, title, onRefresh, onClose}) {
                     <GoTrash />
                     <span>Remove Bookmark</span>
                 </button>
-            </Modal.Open>} 
+            </Modal.Open>}           
             
-            <Modal.Window name="delete">
-                <ConfirmAction onClick={handleDeletePost} 
-                icon={<GoTrash className="text-lg"/>} 
-                action={"delete this post"} loading={deleteLoading} />
-            </Modal.Window>
-
-            <Modal.Window name="removeBookmark">
-                <ConfirmAction onClick={()=> removebookmark(postId)} 
-                icon={<GoTrash className="text-lg"/>} 
-                action={"remove bookmarked post"} loading={bookmarkedLoading} />
-            </Modal.Window>
         </div>
     )
 }

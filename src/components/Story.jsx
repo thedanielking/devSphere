@@ -7,9 +7,10 @@ import useProfile from "../features/profiles/useProfile";
 import { slugify } from "../utils/slugify";
 import { useNavigate } from "react-router-dom";
 
-function Story({ post, isPublished, onRefresh, isReaderView, isWriterView }) {
-    const {profile, loading: profileLoading, error: profileError, fetchProfile} = useProfile();
-    const {title, summary, read_time, id, created_at, cover_image_url, author_id} = post;
+// 1. Accepted the new 'onSelectTarget' prop from the parent list container
+function Story({ post, isPublished, onRefresh, isReaderView, isWriterView, onSelectTarget }) {
+    const { profile, loading: profileLoading, error: profileError, fetchProfile } = useProfile();
+    const { id, title, summary, read_time, created_at, cover_image_url, author_id } = post;
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const navigate = useNavigate();
@@ -17,34 +18,30 @@ function Story({ post, isPublished, onRefresh, isReaderView, isWriterView }) {
     const dateTime = formatDateFns(created_at);
     const slug = slugify(title);
 
-    useEffect(()=> {
-        if(author_id)
-            fetchProfile(author_id)
-    }, [author_id])
+    useEffect(() => {
+        if (author_id) fetchProfile(author_id);
+    }, [author_id]);
 
     const handleProfileClick = (e, authorId, authorFullName) => {
         e.stopPropagation(); 
-        if(authorId) {
+        if (authorId) {
             const userHandle = `${slugify(authorFullName)}-${authorId}`;
-            navigate(`/profile/${userHandle}`)
+            navigate(`/profile/${userHandle}`);
         } 
     };
 
     function handlePostClick(e) {
-        // 1. Added stopPropagation hook safety valve for custom triggers
         if (e) e.stopPropagation();
         if (isReaderView || isWriterView) {
-            navigate(`/posts/${id}/${slug}`)
+            navigate(`/posts/${id}/${slug}`);
         }              
     }
 
-    if(profileLoading) return null;
+    if (profileLoading) return null;
     
     return (
-        // 2. REMOVED onClick from this wrapper container to completely break the layout propagation bug
         <div className="relative flex gap-4 rounded-lg shadow lg:w-full bg-white">
-
-            {/* 3. Click handler targeted directly to the cover image preview box context */}
+            {/* Click handler targeted directly to the cover image preview box context */}
             <picture
                 onClick={handlePostClick}
                 className="hidden md:block flex-2 md:flex-1 max-h-40 cursor-pointer"
@@ -55,7 +52,7 @@ function Story({ post, isPublished, onRefresh, isReaderView, isWriterView }) {
 
             <div className="flex-4 flex flex-col justify-between px-3 py-4">
                 <div className="space-y-3">
-                    {/* 4. Click handlers targeted directly onto the title string layout */}
+                    {/* Click handlers targeted directly onto the title string layout */}
                     <h3
                         onClick={handlePostClick}
                         className="text-base font-medium lg:text-lg cursor-pointer hover:text-indigo-600 transition-colors"
@@ -94,16 +91,15 @@ function Story({ post, isPublished, onRefresh, isReaderView, isWriterView }) {
                             type="button"
                             className="p-1 rounded-full hover:bg-stone-100 transition-colors cursor-pointer"
                             onClick={(e) => {
-                                // 5. Added explicit block to prevent the click from bubbling up
                                 e.preventDefault();
                                 e.stopPropagation();
+                                onSelectTarget(); // 2. Mark this specific post object as active before opening menu
                                 setIsMenuOpen((prev) => !prev);
                             }}
                         >
                             <FaEllipsis className="text-lg" />
                         </button>
 
-                        {/* 6. Wrapped dropdown container to catch and kill bubble events right here */}
                         {isMenuOpen && (
                             <div onClick={(e) => e.stopPropagation()}>
                                 <StoryOptions
