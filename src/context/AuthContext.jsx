@@ -1,13 +1,46 @@
 import toast from "react-hot-toast";
 import supabase from "../services/supabase";
 import { createContext, useState, useEffect, useContext } from "react";
+import { useCallback } from "react";
 
 const AuthContext = createContext();
 
 
 function AuthProvider({children}){
     const [user, setUser] = useState(null);
+    const [userProfile, setUserProfile] = useState(null);
+    const [isProfileLoading, setIsProfileLoading] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    // 1. Create a shareable profile fetching method
+    const refreshGlobalProfile = useCallback(async (userId) => {
+        if (!userId) return;
+        try {
+            setIsProfileLoading(true);
+            const { data, error } = await supabase
+                .from("profiles")
+                .select("*")
+                .eq("id", userId)
+                .single(); // Using single because a user only has one profile row
+
+            if (!error && data) {
+                setUserProfile(data);
+            }
+        } catch (err) {
+            console.error("Global profile fetch error:", err);
+        } finally {
+            setIsProfileLoading(false);
+        }
+    }, []);
+
+    // Fetch profile whenever the authenticated user state initializes or changes
+    useEffect(() => {
+        if (user?.id) {
+            refreshGlobalProfile(user.id);
+        } else {
+            setUserProfile(null);
+        }
+    }, [user?.id, refreshGlobalProfile]);
 
     useEffect(()=> {
         // using a ref to make sure the toast only fires exactly once
@@ -41,15 +74,8 @@ function AuthProvider({children}){
         
     }, []);
 
-    // const value = {
-    //     user, // globally stored user 
-    //     setUser,
-    //     loading,
-    //     setLoading,           
-    // };
-
     return (
-        <AuthContext.Provider value={{user, loading, setUser, setLoading}}>
+        <AuthContext.Provider value={{user, loading, isProfileLoading, setUser, setLoading, userProfile, refreshGlobalProfile}}>
             {children}
         </AuthContext.Provider>
     )

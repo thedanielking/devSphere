@@ -39,7 +39,9 @@ function ViewProfile() {
             </div> */}
 
             <div className="flex items-start gap-3">
-                <img src={avatar_url} alt="avatar bg" crossOrigin="anonymous" className="rounded-full w-20 h-20" />
+                <div className="w-20 h-20 flex items-center justify-center p-2 shadow-md rounded-full overflow-hidden lg:w-35 lg:h-35">
+                    <img src={avatar_url} alt="avatar bg" crossOrigin="anonymous" className="rounded-full w-full h-full object-cover" />
+                </div>
                 <div className="space-y-2">
 
                     <h1 className="text-2xl font-bold">{full_name}</h1>
@@ -47,23 +49,42 @@ function ViewProfile() {
                     <p className="capitalize text-stone-500 font-medium text-base">{role}</p>
 
                     <div className="flex items-center">
-                        <a href={github_url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
-                            <FaGithub className="text-base" />
-                        </a>
-                        <span className="mx-2 text-gray-500">|</span>
-                        <a href={linkedIn_url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
-                            <FaLinkedin className="text-base" />
-                        </a>
-                        <span className="mx-2 text-gray-500">|</span>
-                        <a href={twitter_url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
-                            <FaXTwitter className="text-base" />
-                        </a>
-                        <span className="mx-2 text-gray-500">|</span>
-                        <a href={portfolio_url || "#"} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
-                            <FaLink className="text-base" />
-                        </a>
+                    {github_url && (
+                        <>
+                            <a href={github_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
+                                <FaGithub className="text-base" />
+                            </a>
+                            
+                        </>
+                    )}
+                    {linkedIn_url && (
+                        <>
+                            <span className="mx-2 text-gray-500">|</span>
+                            <a href={linkedIn_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
+                                <FaLinkedin className="text-base" />
+                            </a>
+                        </>
+                    )}
+                    {twitter_url && (
+                        <>
+                            <span className="mx-2 text-gray-500">|</span>
+                            <a href={twitter_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
+                                <FaXTwitter className="text-base" />
+                            </a>
+                        </>
+                    )}
+                    {portfolio_url && (
+                        <>
+                            <span className="mx-2 text-gray-500">|</span>
+                            <a href={portfolio_url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline lg:text-lg">
+                                <FaLink className="text-base" />
+                            </a>
+                        </>
+                    )}     
+                    
+                    
 
-                    </div>
+                </div>      
                 </div>
                 
             </div>

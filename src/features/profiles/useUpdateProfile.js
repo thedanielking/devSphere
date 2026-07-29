@@ -11,10 +11,10 @@ function useUpdateProfile() {
         setError(null);
         try {
             await updateUserProfile(userId, formData);
-            toast.success("Profile updated successfully");
             if (typeof options.onSuccess === "function") {
                 options.onSuccess();
             }
+            toast.success("Profile updated successfully");
         }
         catch(err){
             const message = err?.message;

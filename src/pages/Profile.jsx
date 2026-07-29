@@ -14,7 +14,6 @@ function Profile() {
         fetchProfile(userId);
     }, [userId])
 
-
             
     return (
         <div className="py-10 px-2 space-y-6 lg:py-3.5 lg:px-10">
@@ -24,7 +23,7 @@ function Profile() {
             ) : error ? (
                 <p className="text-red-500">Error loading profile: {error}</p>
             ) : (
-                <ProfileContainer profile={profile} refetchProfile={() => fetchProfile(userId)} />
+                <ProfileContainer userEmail={user?.email}  profile={profile} refetchProfile={() => fetchProfile(userId)} />
             )
             }
         </div>
