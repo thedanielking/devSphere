@@ -4,7 +4,7 @@ import Story from "./Story";
 import { FaRegFolderOpen } from "react-icons/fa";
 import EmptyStories from "./EmptyStories";
 
-function StoriesList({posts = [], isLoading, error, isPublished, onRefresh, isReaderView }) {
+function StoriesList({posts = [], isLoading, error, isPublished, onRefresh, isReaderView, isWriterView }) {
     const skeletonCount = posts && posts.length > 0 ? posts.length : 6;
     return (          
             <div className="mt-10">
@@ -27,7 +27,7 @@ function StoriesList({posts = [], isLoading, error, isPublished, onRefresh, isRe
                     </div>
                 ) : (                    
                         posts.map(post => (
-                            <Story key={post.id} post={post} isPublished={isPublished} onRefresh={onRefresh} isReaderView={isReaderView} />
+                            <Story key={post.id} post={post} isPublished={isPublished} onRefresh={onRefresh} isReaderView={isReaderView} isWriterView={isWriterView} />
                         ))
                     )}
                 </div>

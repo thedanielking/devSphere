@@ -59,7 +59,7 @@ function Stories(){
                             <NetworkError />
                         ) : (
                             draftedPosts.length > 0 ? 
-                            <StoriesList posts={draftedPosts} isLoading={isLoadingDrafts} error={draftsError} isPublished="draft"
+                            <StoriesList posts={draftedPosts}  isLoading={isLoadingDrafts} error={draftsError} isPublished="draft"
                             onRefresh={() => fetchDrafts(userId)} />
                             : <EmptyStories
                             icon={FaRegFolderOpen}
@@ -78,7 +78,7 @@ function Stories(){
                             <NetworkError />
                         ) : (
                             publishedPosts.length > 0 ? 
-                            <StoriesList posts={publishedPosts} isLoading={isLoadingPublished} error={publishedError}
+                            <StoriesList posts={publishedPosts} isWriterView={true} isLoading={isLoadingPublished} error={publishedError}
                             isPublished="published"
                             onRefresh={() => fetchPublished(userId)} />
                             : <EmptyStories
@@ -98,7 +98,7 @@ function Stories(){
                             <NetworkError />
                         ) : (
                             bookmarkedPosts.length > 0 ? 
-                            <StoriesList posts={bookmarkedPosts} isLoading={isLoadingBookmarked} error={bookmarkedError}
+                            <StoriesList posts={bookmarkedPosts} isLoading={isLoadingBookmarked} isWriterView={true} error={bookmarkedError}
                             isPublished="bookmarked"
                             onRefresh={() => fetchBookmarked(userId)} />
                             : <EmptyStories
