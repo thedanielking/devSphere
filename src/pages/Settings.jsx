@@ -1,144 +1,94 @@
-import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
-import useSettings from "../features/settings/useSettings";
-import useUpdateSettings from "../features/settings/useUpdateSettings";
-import Spinner from "../components/Spinner";
+import Modal from "../components/Modal";
+import ConfirmAction from "../components/ConfirmAction";
+import { GoTrash, GoPerson, GoShield } from "react-icons/go";
+import { useDeleteAccount } from "../features/profiles/useDeleteAccount";
 
 function Settings() {
-    const {user} = useAuth();
-    const userId = user?.id;
-    const {data: settings, loading, fetchSettings} = useSettings();
-    const [form, setForm] = useState({
-        email_notifications: false,
-        likes_notifications: false,
-        comments_notifications: false,
-    })
-    const {updateSettings, loading: updating } = useUpdateSettings();
+    const { user, userProfile } = useAuth();
+    const { loading: isDeleting, deleteAccount } = useDeleteAccount();
 
-    const handleChange = (e) => {
-        const target = e.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        setForm((prevForm) => ({
-            ...prevForm,
-            [name]: value,
-        }));
-    };
-
-    useEffect(()=>{
-        if(!userId) return;
-        fetchSettings(userId);
-    }, [userId]) 
-
-    // Update form when settings are fetched
-    useEffect(() => {
-        if (settings) {
-            setForm({
-                email_notifications: settings.email_notifications || false,
-                likes_notifications: settings.likes_notifications || false,
-                comments_notifications: settings.comments_notifications || false,
-            });
-        }
-    }, [settings]);
-
-    function handleSubmit(e){
-        e.preventDefault();
-    }
-
-    async function handleNotificationsUpdate(e){
-        e.preventDefault();
-        await updateSettings(userId, form);
-        // Refetch settings after successful update
-        await fetchSettings(userId);
-    }
-
-    if(loading) return <Spinner />
     return (
-        <div className="py-10 px-2 space-y-6 lg:py-3.5 lg:px-10">
+        <div className="py-6 px-2 space-y-8 lg:py-3.5 lg:px-10 max-w-2xl lg:max-w-5xl">
+
+            {/* ── Page Header ── */}
             <div>
-                <h2 className="text-xl font-bold lg:text-2xl">Account Settings</h2>
-                <p className="text-sm text-stone-600">Make changes to your personal information or account type</p>
+                <h1 className="text-xl font-bold lg:text-2xl text-stone-900 tracking-tight">Settings</h1>
+                <p className="text-sm text-stone-500">Manage your developer account configurations and data privacy.</p>
             </div>
-            <div className="lg:w-[800px]">
-                <h2 className="text-lg font-medium">Your account</h2>
-                <form className="space-y-5" onSubmit={handleSubmit}>
-                    <div className="flex flex-col gap-1">
-                        <label htmlFor="email" className="flex items-center gap-1  text-stone-600 mt-3">
-                            Email &bull; Private
-                        </label>
-                        <input type="email" id="email" value={user?.email || ""} readOnly
-                        name="email" placeholder="you@example.com"
-                        className="w-full p-2 border border-stone-300 rounded-md outline-none "
-                         />
-                        <p className="px-2 py-1 bg-green-100 text-green-800 font-medium w-fit">{user?.aud === "authenticated" ? "confirmed" :"not confirmed"}</p>
+
+            {/* ── Profile Snapshot Section ── */}
+            <div className="p-4 rounded-xl bg-stone-50 border border-stone-200/60 flex items-center gap-4">
+                <div className="w-12 h-12 p-1 rounded-full overflow-hidden shadow flex items-center justify-center flex-shrink-0">
+                    <img
+                        src={userProfile?.avatar_url || "../person.png"}
+                        alt="avatar"
+                        className="w-full h-full object-cover rounded-full"
+                        crossOrigin="anonymous"
+                    />
+                </div>
+                <div>
+                    <h2 className="text-sm font-semibold text-stone-800">{userProfile?.full_name || "User"}</h2>
+                    <p className="text-xs text-stone-400 font-mono">{user?.email}</p>
+                </div>
+            </div>
+
+            {/* ── Basic Preferences Section ── */}
+            <div className="space-y-4">
+                <h3 className="text-xs font-bold text-stone-400 uppercase tracking-widest border-b border-stone-100 pb-2 flex items-center gap-1.5">
+                    <GoShield />
+                    <span>Preferences</span>
+                </h3>
+                <div className="flex items-center justify-between p-2.5 rounded-lg border border-stone-100 bg-white">
+                    <div>
+                        <p className="text-sm font-medium text-stone-700">Interface Theme</p>
+                        <p className="text-xs text-stone-400">System dark mode toggle support placeholder.</p>
                     </div>
-                    <div className="flex justify-between items-center">
-                        <label htmlFor="password" className="font-medium text-stone-600">
-                            {/* Password */}
-                        </label>
-                        <button className="bg-primary text-stone-50 px-6 py-2 rounded cursor-pointer hover:bg-primary-darker"
+                    <select disabled className="text-xs border border-stone-200 p-1.5 rounded-lg bg-stone-50 text-stone-500 cursor-not-allowed">
+                        <option>Light Mode (Default)</option>
+                    </select>
+                </div>
+            </div>
+
+            {/* ── Danger Zone Section ── */}
+            <div className="pt-6 border-t border-stone-200/80 space-y-4">
+                <h3 className="text-xs font-bold text-red-500 uppercase tracking-widest flex items-center gap-1.5">
+                    <GoTrash className="text-sm" />
+                    <span>Danger Zone</span>
+                </h3>
+
+                <div className="p-4 rounded-xl border border-red-100 bg-red-50/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="space-y-1">
+                        <p className="text-sm font-semibold text-stone-800">Delete Account</p>
+                        <p className="text-xs text-stone-500 leading-relaxed max-w-md">
+                            Permanently delete your profile card, published stories, drafts, and bookmarks. This action cannot be undone.
+                        </p>
+                    </div>
+
+                    {/* 2. Open the Confirmation Window built specifically into your Modal component */}
+                    <Modal.Open opens="confirm-account-deletion">
+                        <button 
+                            type="button"
+                            className="px-4 py-2 text-xs font-semibold text-red-600 bg-white hover:bg-red-50 border border-red-200 rounded-lg transition-colors cursor-pointer self-start sm:self-center"
                         >
-                            Change
+                            Delete Account
                         </button>
-                    </div>
-                </form>
+                    </Modal.Open>
+                </div>
             </div>
 
-            {/* <div>
-                <h2 className="text-lg font-medium">Notifications Settings</h2>
-                <p className="text-stone-600 lg:text-xl">
-                    We may send you notifications about your account activity and updates. You can manage your notification preferences in your account settings.
-                </p>
+            {/* 3. The isolated confirmation prompt window */}
+            <Modal.Window name="confirm-account-deletion">
+                <ConfirmAction
+                    action="delete your account"
+                    icon={<GoTrash className="text-lg" />}
+                    onClick={deleteAccount} 
+                    loading={isDeleting}
+                />
+            </Modal.Window>
 
-                <form className="flex flex-col gap-1">
-                    <label className="flex items-center gap-2 mt-5">
-                        <input
-                        id="email"
-                        name="email_notifications" 
-                        type="checkbox"
-                        checked={form?.email_notifications}
-                        onChange={handleChange}
-                        className="accent-primary h-5 w-5 text-primary" />
-                        <span className="text-stone-600">Email Notifications</span>
-                    </label>
-                    <label className="flex items-center gap-2 mt-5">
-                        <input
-                        id="likes"
-                        name="likes_notifications" 
-                        type="checkbox"
-                        checked={form?.likes_notifications}
-                        onChange={handleChange}
-                        className="accent-primary h-5 w-5 text-primary" />
-                        <span className="text-stone-600">Likes Notifications</span>
-                    </label>
-                    <label className="flex items-center gap-2 mt-5">
-                        <input
-                        id="comments"
-                        name="comments_notifications" 
-                        type="checkbox"
-                        checked={form?.comments_notifications}
-                        onChange={handleChange}
-                        className="accent-primary h-5 w-5 text-primary" />
-                        <span className="text-stone-600">Comments Notifications</span>
-                    </label>
-                    <button 
-                    className="bg-primary text-stone-50 px-6 py-2 rounded cursor-pointer mt-5 w-fit ml-auto  hover:bg-primary-darker disabled:cursor-not-allowed" 
-                    onClick={handleNotificationsUpdate}
-                    disabled={updating}>
-                        Update Preferences
-                    </button>
-                </form>
-            </div> */}
-
-            <div className="border-t border-stone-300 pt-5 mt-10">
-                <h2 className="text-lg font-medium">Account Deletion</h2>
-                <p className="text-stone-600 lg:text-xl">Deleting your account is permanent and cannot be undone.</p>
-                <button className="bg-red-600 text-stone-50 px-6 py-2 rounded cursor-pointer mt-5 hover:bg-red-600">Delete Account</button>
-            </div>
-            
         </div>
-    )
+    );
 }
 
-export default Settings
+export default Settings;

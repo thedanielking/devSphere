@@ -64,6 +64,21 @@ export async function logout(){
 }
 
 
+export async function deleteUserAccount() {
+
+    // Deleting the auth user automatically triggers the profile, post, and bookmark cascades!
+    const { error } = await supabase.rpc('delete_authenticated_user');
+
+    if (error) {
+        console.error("Account Purge Service Error details:", error);
+        throw new Error(error.message || "Your account could not be deleted!");
+    }
+
+    return true;
+}
+
+
+
 
 
 

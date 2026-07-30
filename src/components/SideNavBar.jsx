@@ -17,7 +17,7 @@ function SideNavBar({ display, toggleSideNav }) {
     return (
         <ul
             ref={ref}
-            className={`px-4 py-6 space-y-12 text-base backdrop-blur-lg shadow-md
+            className={`px-4 py-6 space-y-6 text-base backdrop-blur-lg shadow-md
                 fixed left-0 h-dvh z-50 
                 transition-all duration-300 ease-in-out
                 
@@ -26,7 +26,7 @@ function SideNavBar({ display, toggleSideNav }) {
                 
                 /* Large Screen (Desktop) Behavior */
                 /* 1. Changed lg:overflow-y-auto to lg:overflow-y-visible to stop clipping the button */
-                lg:sticky lg:top-32 lg:h-[calc(100vh-160px)] lg:overflow-y-visible lg:z-0 lg:backdrop-blur-none lg:shadow-none lg:border-r lg:border-r-stone-200 lg:translate-x-0
+                lg:sticky lg:top-15 lg:h-[calc(100vh-200px)] lg:overflow-y-visible lg:z-0 lg:backdrop-blur-none lg:shadow-none lg:border-r lg:border-r-stone-200 lg:translate-x-0
                 ${display ? 'lg:w-40 lg:px-1' : 'lg:w-0 lg:px-0 lg:py-0 lg:border-none'}
             `}
         >
@@ -54,6 +54,11 @@ function SideNavBar({ display, toggleSideNav }) {
                 <Link to="/stories" className="px-3 py-4 flex items-center gap-2 hover:bg-stone-50 cursor-pointer rounded transition-colors">
                     <GoBookmark className="text-primary text-xl" />
                     <span>Stories</span>
+                </Link>
+
+                <Link to="/settings" className="px-3 py-4 flex items-center gap-2 hover:bg-stone-50 cursor-pointer rounded transition-colors">
+                    <CiSettings className="text-primary text-xl" />
+                    <span>Settings</span>
                 </Link>
 
                 {user && (

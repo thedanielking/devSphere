@@ -55,7 +55,7 @@ function Filter() {
             
             <ul className="flex flex-wrap justify-center gap-5">
                 {filterTags.map((tag)=> (
-                    <Tags tag={tag.title} tagId={tag.id} Icon={tag.icon} onSelect={handleTagClick} />
+                    <Tags key={tag.id} tag={tag.title} tagId={tag.id} Icon={tag.icon} onSelect={handleTagClick} />
                 ))}
             </ul>
         </aside>
