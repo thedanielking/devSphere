@@ -39,7 +39,7 @@ function ViewProfile() {
             </div> */}
 
             <div className="flex items-start gap-3">
-                <div className="w-20 h-20 flex items-center justify-center p-2 shadow-md rounded-full overflow-hidden lg:w-35 lg:h-35">
+                <div className="w-20 h-20 flex items-center justify-center p-1 shadow-md rounded-full overflow-hidden lg:w-35 lg:h-35">
                     <img src={avatar_url} alt="avatar bg" crossOrigin="anonymous" className="rounded-full w-full h-full object-cover" />
                 </div>
                 <div className="space-y-2">
@@ -84,7 +84,7 @@ function ViewProfile() {
                     
                     
 
-                </div>      
+                    </div>      
                 </div>
                 
             </div>

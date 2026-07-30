@@ -17,16 +17,15 @@ function SideNavBar({ display, toggleSideNav }) {
     return (
         <ul
             ref={ref}
-            className={`px-4 py-6 space-y-6 text-base backdrop-blur-lg shadow-md
+            className={`px-4 py-6 space-y-2 text-base backdrop-blur-lg shadow-md
                 fixed left-0 h-dvh z-50 
                 transition-all duration-300 ease-in-out
                 
                 /* Mobile Behavior */
                 ${display ? 'w-64 translate-x-0' : 'w-64 -translate-x-full'}
                 
-                /* Large Screen (Desktop) Behavior */
-                /* 1. Changed lg:overflow-y-auto to lg:overflow-y-visible to stop clipping the button */
-                lg:sticky lg:top-15 lg:h-[calc(100vh-200px)] lg:overflow-y-visible lg:z-0 lg:backdrop-blur-none lg:shadow-none lg:border-r lg:border-r-stone-200 lg:translate-x-0
+                /* Large Screen (Desktop) Behavior */                
+                lg:sticky lg:top-32 lg:h-[calc(100vh-200px)] lg:overflow-y-visible lg:z-0 lg:backdrop-blur-none lg:shadow-none lg:border-r lg:border-r-stone-200 lg:translate-x-0
                 ${display ? 'lg:w-40 lg:px-1' : 'lg:w-0 lg:px-0 lg:py-0 lg:border-none'}
             `}
         >
@@ -40,7 +39,7 @@ function SideNavBar({ display, toggleSideNav }) {
             </div>
             
             {/* 3. SCROLL ISOLATION LAYER: Put internal scrolling rules here so long item trees don't affect parent wrappers */}
-            <div className={`w-54 lg:w-34 space-y-12 pt-6 overflow-y-auto max-h-[calc(100vh-220px)] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden transition-opacity duration-200 ${display ? 'opacity-100' : 'opacity-0 pointer-events-none lg:hidden'}`}>
+            <div className={`w-54 lg:w-34 space-y-10 pt-6 overflow-y-auto max-h-[calc(100vh-150px)] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden transition-opacity duration-200 ${display ? 'opacity-100' : 'opacity-0 pointer-events-none lg:hidden'}`}>
                 <Link to="/" className="px-3 py-4 flex items-center gap-2 hover:bg-stone-50 cursor-pointer rounded transition-colors">
                     <GoHome className="text-primary text-xl" />
                     <span>Home</span>

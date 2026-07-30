@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { GoTrash } from "react-icons/go";
+import { GoTrash, GoUpload } from "react-icons/go";
 import useUpdateProfile from "../features/profiles/useUpdateProfile";
 import { useAuth } from "../context/AuthContext";
 import SpinnerMini from "./SpinnerMini";
@@ -136,7 +136,7 @@ export default function ProfileEdit({ profile, onCloseModal, refetchProfile }) {
 
     return (
         <form
-            className="w-full max-w-[380px] md:max-w-[620px] max-h-[85vh] bg-white rounded-xl shadow-xl flex flex-col overflow-hidden"
+            className="w-full min-w-full md:min-w-[700px] lg:min-w-[800px] max-w-[380px] md:max-w-2xl lg:max-w-4xl max-h-[85vh] bg-white rounded-xl shadow-xl flex flex-col overflow-hidden"
             onSubmit={(e) => {
                 e.preventDefault();
                 handleSubmit();
@@ -171,7 +171,7 @@ export default function ProfileEdit({ profile, onCloseModal, refetchProfile }) {
                         <span className="block text-sm font-semibold text-stone-700">Profile Image</span>
                         <div className="flex items-center gap-2 justify-center sm:justify-start">
                             <label htmlFor="avatarUrl" className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 cursor-pointer transition-colors border border-indigo-100">
-                                {/* <GoCloudUpload className="text-sm" /> */}
+                                <GoUpload className="text-sm" />
                                 <span>Upload photo</span>
                             </label>
                             <input type="file" id="avatarUrl" name="avatarUrl" accept="image/*" className="sr-only" onChange={handleChange} />
