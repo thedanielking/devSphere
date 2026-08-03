@@ -32,7 +32,16 @@ function App() {
           <Route path="/profile/:userHandle" element={<ViewProfile />} />
           <Route path="/stories" element={<Stories />} />
           <Route path="/posts/:postId/:slug" element={<PostPage />} />
-          <Route path="/stories/write" element={
+
+          <ProtectedRoute>
+            <Route path="/stories/write" element={<TemplateSelection />} />
+            <Route path="/stories/write/template/:templateId" element={<WritePost />}/>
+            <Route path="/stories/write/edit/:postId" element={<WritePost />}/>
+            <Route path="/profile" element={<Profile />}/>
+            <Route path="/settings" element={<Settings />}/>
+          </ProtectedRoute>
+          
+          {/* <Route path="/stories/write" element={
             <ProtectedRoute>
               <TemplateSelection />
             </ProtectedRoute>
@@ -57,8 +66,7 @@ function App() {
             <ProtectedRoute>
               <Settings />
             </ProtectedRoute >
-          } />
-          
+          } />         */}
         </Route>
 
         <Route path="*" element={<Error404 />} />
