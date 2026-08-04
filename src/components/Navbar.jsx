@@ -22,7 +22,7 @@ function Navbar({ toggleSideNav, display }) {
                         )
                     ) : null}
                     <Link to="/">
-                        <img src="../default-monochrome-black.svg" alt="DevSphere Logo" className="w-[90px] md:w-[100px]" crossOrigin="anonymous" />
+                        <img src="/default-monochrome-black.svg" alt="DevSphere Logo" className="w-[90px] md:w-[100px]" crossOrigin="anonymous" />
                     </Link>
                 </div>
 
